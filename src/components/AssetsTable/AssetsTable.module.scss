@@ -7,7 +7,6 @@
     width: 90%;
     margin: auto;
     margin-right: 30em;
-
     table {
       width: 100%;
       border-collapse: collapse;
@@ -20,7 +19,7 @@
       tbody {
         th,
         td {
-          padding:0.9em 0;
+          padding:1em 0;
           text-align: left;
         }
       }
@@ -31,12 +30,6 @@
             border-bottom: none;
           }
 
-          td.AccountBlock {
-            display: flex;
-            align-items: center;
-            gap: 1em;
-          }
-
           .Blockie {
             border-radius: 40%;
           }
@@ -44,6 +37,11 @@
       }
     }
   }
-  .tr {
+  .trl {
     cursor: pointer;
+  }
+  .AccountBlock {
+    display: flex;
+    align-items:center;
+     gap: 1em;
   }

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./AssetsTable.module.scss";
-import Blockies from "react-blockies";
+import Blockie from "react-blockies";
 import { getEllipsisTxt } from "../../App";
 
 export const AssetsTable = ({ object }) => {
@@ -18,15 +18,15 @@ export const AssetsTable = ({ object }) => {
         <tbody>
           {object.map((tableObject, index) => {
             return (
-              <tr key={index} className={[styles.TR, "tr"]}>
-                {tableObject.quote_rate && tableObject.balance > 0 ? (
+              <tr key={index} className={[styles.TR, "trl"]}>
+                {tableObject.quote_rate > "0" && tableObject.balance > "0" ? (
                   <>
                     <td className={styles.AccountBlock}>
                       <img
                         width={"40px"}
                         height={"40px"}
                         src={tableObject.logo_url}
-                        alt={"# "}
+                        alt={"#"}
                       />
                       <span>{tableObject.contract_name}</span>
                     </td>
@@ -42,8 +42,9 @@ export const AssetsTable = ({ object }) => {
                       ${" "}
                       {(
                         tableObject.balance *
-                        10 ** -tableObject.contract_decimals
-                      ).toFixed(2) * tableObject.quote_rate.toFixed(2)}
+                        10 ** -tableObject.contract_decimals *
+                        tableObject.quote_rate
+                      ).toFixed(2)}
                     </td>
                   </>
                 ) : (

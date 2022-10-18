@@ -10,6 +10,7 @@ import { Overview } from "./pages/Overview";
 import { Send } from "./pages/Send";
 import { Swap } from "./pages/Swap";
 import { Vault } from "./pages/Vault";
+import { NFTView } from "./pages/NFTView";
 
 function App() {
   // const { data: ensAvatar } = useEnsAvatar({ addressOrName: address });
@@ -99,6 +100,10 @@ function App() {
           <div className="center">
             <Routes>
               <Route path="/:address/overview" element={<Overview />} />
+              <Route
+                path="/:address/:token_id/overview"
+                element={<NFTView />}
+              />
               <Route path="/explore" element={<Vault />} />
               <Route path="/send" element={<Send />} />
               <Route path="/swap" element={<Swap />} />

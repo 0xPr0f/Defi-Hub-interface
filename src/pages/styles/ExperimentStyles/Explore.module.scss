@@ -363,4 +363,30 @@
     font-size: 0.9em !important;
     padding: 0.65em 0.5em !important;
   }
-  
+  .Overview{
+    padding: 30px;
+    font-size: 25px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }
+  .Blockie {
+    border-radius: 50%;
+  }
+  .copyButton {
+    transition: all 0.2s linear;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 145px;
+
+    span {
+      margin-right: 0.5em;
+    }
+  }
+.Main {
+    margin: auto;
+    width: 70%;
+    padding: 80px;
+}
