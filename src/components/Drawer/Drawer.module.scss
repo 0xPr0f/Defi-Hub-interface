@@ -1,0 +1,65 @@
+.Drawer {
+  border: 2px solid #2e3348;
+  background-color: #161522;
+  margin: 0.5em 0;
+  border-radius: 12px;
+  padding: 0.5em 1rem;
+
+  &Info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 0.5em;
+    padding-right: 0.5em;
+  }
+
+  &Form {
+    &Input {
+      display: flex;
+
+      input {
+        flex: 1;
+        outline: none;
+        border: none;
+        background-color: transparent;
+        color: #ffffff;
+        font-size: 1.5em;
+        font-size: 700;
+
+        &:disabled {
+          cursor: not-allowed;
+        }
+      }
+    }
+
+    &Dropper {
+      display: flex;
+      align-items: center;
+      background-color: #202231;
+      max-width: fit-content;
+      padding: 0.5em;
+      border-radius: 50px;
+      cursor: pointer;
+
+      .availableToken{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 1.2em;
+      }
+
+      span {
+        font-size: .9em;
+        margin: 0 0.5em;
+        font-weight: 900;
+      }
+
+      img {
+        &:nth-of-type(1) {
+          width: 25px;
+          height: 25px;
+        }
+      }
+    }
+  }
+}

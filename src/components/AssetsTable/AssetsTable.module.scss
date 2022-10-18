@@ -1,0 +1,49 @@
+.Table {
+    border: 1px solid rgba(240, 240, 240, 0.862);
+    padding: 0.25em;
+    margin-top: 12em;
+    padding: 0.5em 1em;
+    border-radius: 7px;
+    width: 90%;
+    margin: auto;
+    margin-right: 30em;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      .TR {
+        border-bottom: 1px solid rgb(225, 225, 225);
+      }
+
+      thead,
+      tbody {
+        th,
+        td {
+          padding:0.9em 0;
+          text-align: left;
+        }
+      }
+
+      tbody {
+        .TR {
+          &:nth-last-of-type(1) {
+            border-bottom: none;
+          }
+
+          td.AccountBlock {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+          }
+
+          .Blockie {
+            border-radius: 40%;
+          }
+        }
+      }
+    }
+  }
+  .tr {
+    cursor: pointer;
+  }

@@ -1,5 +1,11 @@
 import React from "react";
+import { NFTView } from "./NFTView";
 
 export const Send = () => {
-  return <div>Send</div>;
+  return (
+    <div>
+      Send
+      <NFTView />
+    </div>
+  );
 };

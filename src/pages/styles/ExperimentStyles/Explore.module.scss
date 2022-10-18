@@ -16,7 +16,7 @@
     }
   
     &Bid {
-      margin: 14em auto 8.5em;
+      margin: 14em auto 5em;
       width: 22em;
       font-weight: 600;
       padding: 0.75em 0.55em;
@@ -45,21 +45,26 @@
   
     &Tab {
       width: fit-content;
-      margin: auto;
+    //  margin: auto;
+    margin-top: 90px;
+      font-size: 20px;
   
       span {
         display: inline-block;
-        height: 2.5em;
+        height: 1.3em;
         box-sizing: border-box;
         transition: border 0.2s linear;
         cursor: pointer;
   
         &:nth-of-type(2) {
-          margin-left: 2em;
+          margin-left: 20px;
         }
+        &:nth-of-type(3) {
+            margin-left: 20px;
+          }
   
         &.ExploreTabActive {
-          border-bottom: 2px solid #000000;
+          border-bottom: 2px solid white;
         }
       }
     }

@@ -1,0 +1,46 @@
+.AppHeader {
+    min-height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+    .SwapComponent {
+      background-color: #202231;
+      width: 50%;
+      max-width: 28rem;
+      padding: 1.5rem; 
+      color: #ffffff;
+      border-radius: 10px;
+  
+      &Header {
+        margin: .2em 0 1em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+  
+        span {
+          display: block;
+          line-height: 1.25rem;
+          font-weight: 700;
+        }
+      }
+  
+      .hr{
+        border-bottom: 2px solid #ffffff;
+      }
+  
+      button{
+        width: 100%;
+        background-color: #3598db;
+        outline: none;
+        border: none;
+        border-radius: 12px;
+        font-size: 1.2em;
+        color: #ffffff;
+        padding: .5em 0;
+        font-weight: 900;
+      }
+    }
+  }
+  

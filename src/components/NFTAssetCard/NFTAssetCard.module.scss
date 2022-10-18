@@ -1,0 +1,128 @@
+.NFTCard {
+    width: 100%;
+    padding: 0.5em;
+    box-sizing: border-box;
+    border-radius: 15px;
+    cursor: pointer;
+    position: relative;
+    background-color: #1D1D21;
+    transition: background 0.2s linear;
+    display: block;
+  
+    
+  
+    h2 {
+      font-size: 0.9375em;
+      font-weight: 600;
+      margin: 0;
+      margin: 0.8em auto 0.8em 0.75em;
+      display: block;
+      overflow: hidden;
+      width: 90%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    
+    @media screen and (max-width: 336px) {
+      width: 95%;
+      margin: auto;
+      
+      h2{
+        margin: 1em auto 1em .75em;
+      }
+    }
+  
+    img {
+      border-radius: 15px;
+      width: 100% !important;
+    }
+  
+    button {
+      position: absolute;
+      transition: all 0.1s linear;
+      top: 75%;
+      cursor: pointer;
+      z-index: -1;
+      opacity: 0;
+  
+      outline: none;
+      border: none;
+      border-radius: 50px;
+      background-color: rgb(8, 8, 154);
+      color:#16161A;
+      font-weight: 500;
+      padding: 0.8em 1.8em;
+      width: 8em;
+  
+      right: 50%;
+      transform: translate(50%, -50%);
+    }
+  
+    .pricingInfo {
+      padding: 0.9em;
+      border-radius: 15px;
+      transition: background 0.2s linear;
+      background-color: #16161A;
+  
+      div {
+        flex: 1;
+        span {
+          display: block;
+          font-size: 0.8em;
+  
+          &:nth-of-type(1) {
+            color: white;
+            margin-bottom: 0.4em;
+          }
+        }
+  
+        @media screen and (max-width: 803px) {
+          &:nth-of-type(2) {
+            display: none;
+          }
+        }
+  
+        @media screen and (max-width: 690px) {
+          &:nth-of-type(2) {
+            display: block;
+          }
+        }
+  
+        @media screen and (max-width: 527px) {
+          &:nth-of-type(2) {
+            display: none;
+          }
+        }
+  
+        @media screen and (max-width: 336px) {
+          &:nth-of-type(2) {
+            display: block;
+          }
+        }
+      }
+    }
+  
+    &:hover {
+      background-color: #1D1D21;
+  
+      .pricingInfo {
+        background-color: #16161A;
+      }
+  
+      button {
+        top: 55%;
+        right: 50%;
+        transform: translate(50%, -50%);
+        opacity: 1;
+        z-index: 1;
+      }
+      @media screen and (max-width: 768px) {
+        &:hover {
+          button {
+            top: 50%;
+          }
+        }
+      }
+    }
+  }
+  
