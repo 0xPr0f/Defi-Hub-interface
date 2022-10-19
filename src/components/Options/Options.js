@@ -21,11 +21,13 @@ export default function Options({ children, anchorEl, handleClose }) {
       }}
       PaperProps={{
         style: {
+          color: "white",
+          backgroundColor: "#2D2D32",
           marginTop: ".5em",
           marginRight: "500em",
           padding: ".5em",
           borderRadius: "10px",
-          width: "12em",
+          width: "8em",
           boxShadow:
             "rgb(0 0 0 / 20%) 0px 10px 15px -1px, rgb(0 0 0 / 11%) 0px 4px 6px -2px",
           fontFamily: `"Inter", sans-serif`,

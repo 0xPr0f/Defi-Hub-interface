@@ -19,7 +19,7 @@ export const Swap = () => {
 
   return (
     <>
-      <div style={{ minHeight: "120vh" }}>
+      <div className="center" style={{ minHeight: "120vh" }}>
         <div>Swap</div>
         <div className={styles.App}>
           <header className={styles.AppHeader}>

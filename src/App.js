@@ -11,6 +11,8 @@ import { Send } from "./pages/Send";
 import { Swap } from "./pages/Swap";
 import { Vault } from "./pages/Vault";
 import { NFTView } from "./pages/NFTView";
+import { Bridge } from "./pages/Bridge";
+import { Earn } from "./pages/Earn";
 
 function App() {
   // const { data: ensAvatar } = useEnsAvatar({ addressOrName: address });
@@ -90,6 +92,11 @@ function App() {
             Vault
           </Link>
         </span>
+        <span>
+          <Link className="un" to="/bridge">
+            Bridge
+          </Link>
+        </span>
         <div className="your-div">
           <span className="namefooter"> TESTTEST </span>
         </div>
@@ -104,10 +111,12 @@ function App() {
                 path="/:address/:token_id/overview"
                 element={<NFTView />}
               />
-              <Route path="/explore" element={<Vault />} />
+              {/*} <Route path="/explore" element={<Vault />} /> */}
+              <Route path="/earn" element={<Earn />} />
               <Route path="/send" element={<Send />} />
               <Route path="/swap" element={<Swap />} />
               <Route path="/vault" element={<Vault />} />
+              <Route path="/bridge" element={<Bridge />} />
             </Routes>
           </div>
         </div>

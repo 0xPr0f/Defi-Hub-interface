@@ -5,7 +5,9 @@ import { NFTView } from "./NFTView";
 export const Send = () => {
   return (
     <>
-      <div style={{ minHeight: "120vh" }}>Send</div>
+      <div className="center" style={{ minHeight: "120vh" }}>
+        Send
+      </div>
       <Footer />
     </>
   );

@@ -4,7 +4,9 @@ import Footer from "../components/Footer/Footer";
 export const Earn = () => {
   return (
     <>
-      <div style={{ minHeight: "120vh" }}>Earn</div>
+      <div className="center" style={{ minHeight: "120vh" }}>
+        Earn
+      </div>
       <Footer />
     </>
   );

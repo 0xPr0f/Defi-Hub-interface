@@ -72,128 +72,134 @@ export const Overview = () => {
         <div style={{ minHeight: "120vh" }}>
           {address.length === 42 ? (
             <>
-              <div className={styles.Overview}>
-                <Blockies
-                  seed={"" + address + ""}
-                  size={10}
-                  scale={3}
-                  className={styles.Blockie}
-                />
-                <span>{getEllipsisTxt(address)}</span>
-              </div>
-              <Button
-                type={"small"}
-                className={styles.copyButton}
-                clickFunction={() => copyToClipboard(address)}
-              >
-                <span>{copyValue}</span>
-                <IoCopyOutline />
-              </Button>
-              <div className={styles.ExploreTab}>
-                <span
-                  className={
-                    activeTab === "token"
-                      ? styles.ExploreTabActive
-                      : styles.ExploreTabInactive
-                  }
-                  onClick={() => {
-                    setActiveTab("token");
-                  }}
-                >
-                  Token
-                </span>
-                <span
-                  className={
-                    activeTab === "nft"
-                      ? styles.ExploreTabActive
-                      : styles.ExploreTabInactive
-                  }
-                  onClick={() => {
-                    setActiveTab("nft");
-                    nftload();
-                  }}
-                >
-                  NFTs
-                </span>
-                <span
-                  className={
-                    activeTab === "transactions"
-                      ? styles.ExploreTabActive
-                      : styles.ExploreTabInactive
-                  }
-                  onClick={() => setActiveTab("transactions")}
-                >
-                  Transactions
-                </span>
-                <div>
-                  {activeTab === "transactions" ? (
-                    <>
-                      <div>Hello</div>
-                    </>
-                  ) : (
-                    <></>
-                  )}
+              <div className="center">
+                <div className={styles.Overview}>
+                  <Blockies
+                    seed={"" + address + ""}
+                    size={10}
+                    scale={3}
+                    className={styles.Blockie}
+                  />
+                  <span>{getEllipsisTxt(address)}</span>
                 </div>
-                <div>
-                  {activeTab === "token" ? (
-                    <>
-                      <br />
-                      <div>
-                        <span style={{ fontSize: "40px" }}>Assets</span>
-                      </div>
-                      <br />
-
-                      {acount[0] !== undefined ? (
+                <Button
+                  type={"small"}
+                  className={styles.copyButton}
+                  clickFunction={() => copyToClipboard(address)}
+                >
+                  <span>{copyValue}</span>
+                  <IoCopyOutline />
+                </Button>
+                <div className={styles.ExploreTab}>
+                  <span
+                    className={
+                      activeTab === "token"
+                        ? styles.ExploreTabActive
+                        : styles.ExploreTabInactive
+                    }
+                    onClick={() => {
+                      setActiveTab("token");
+                    }}
+                  >
+                    Token
+                  </span>
+                  <span
+                    className={
+                      activeTab === "nft"
+                        ? styles.ExploreTabActive
+                        : styles.ExploreTabInactive
+                    }
+                    onClick={() => {
+                      setActiveTab("nft");
+                      nftload();
+                    }}
+                  >
+                    NFTs
+                  </span>
+                  <span
+                    className={
+                      activeTab === "transactions"
+                        ? styles.ExploreTabActive
+                        : styles.ExploreTabInactive
+                    }
+                    onClick={() => setActiveTab("transactions")}
+                  >
+                    Transactions
+                  </span>
+                  <div>
+                    {activeTab === "transactions" ? (
+                      <>
+                        <br />
                         <div>
-                          {acount.length > 0 && acount[0].balance !== "0" ? (
+                          <span style={{ fontSize: "40px" }}>Transactions</span>
+                        </div>
+                        <br />
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div>
+                    {activeTab === "token" ? (
+                      <>
+                        <br />
+                        <div>
+                          <span style={{ fontSize: "40px" }}>Assets</span>
+                        </div>
+                        <br />
+
+                        {acount[0] !== undefined ? (
+                          <div>
+                            {acount.length > 0 && acount[0].balance !== "0" ? (
+                              <div>
+                                <AssetsTable object={acount} />
+                              </div>
+                            ) : (
+                              <div>
+                                <span>You have no Token assets</span>
+                              </div>
+                            )}
+                          </div>
+                        ) : null}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div>
+                    {activeTab === "nft" ? (
+                      <>
+                        <br />
+                        <span style={{ fontSize: "40px" }}>Assets</span>
+                        <br />
+                        <div>
+                          <br />
+                          {nft.length !== 0 ? (
                             <div>
-                              <AssetsTable object={acount} />
+                              {nft.map((nfts, index) => (
+                                <div key={index}>
+                                  {nftimage(nfts.token_uri).image}
+                                  <NFTCard
+                                    key={index}
+                                    image={nftImage.image}
+                                    name={nfts.name}
+                                    contractaddress={nfts.token_address}
+                                    tokenid={nfts.token_id}
+                                  />
+                                </div>
+                              ))}
                             </div>
                           ) : (
                             <div>
-                              <span>You have no Token assets</span>
+                              <span>You have no NFT assets</span>
                             </div>
                           )}
                         </div>
-                      ) : null}
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                </div>
-                <div>
-                  {activeTab === "nft" ? (
-                    <>
-                      <br />
-                      <span style={{ fontSize: "40px" }}>Assets</span>
-                      <br />
-                      <div>
-                        <br />
-                        {nft.length !== 0 ? (
-                          <div>
-                            {nft.map((nfts, index) => (
-                              <div key={index}>
-                                {nftimage(nfts.token_uri).image}
-                                <NFTCard
-                                  key={index}
-                                  image={nftImage.image}
-                                  name={nfts.name}
-                                  contractaddress={nfts.token_address}
-                                  tokenid={nfts.token_id}
-                                />
-                              </div>
-                            ))}
-                          </div>
-                        ) : (
-                          <div>
-                            <span>You have no NFT assets</span>
-                          </div>
-                        )}
-                      </div>
-                    </>
-                  ) : (
-                    <></>
-                  )}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
                 </div>
               </div>
             </>

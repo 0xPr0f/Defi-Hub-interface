@@ -37,9 +37,9 @@ export const NFTView = () => {
 
   return (
     <>
-      <div style={{ minHeight: "120vh" }} className="NFTview">
+      <div style={{ minHeight: "120vh" }}>
         {address !== undefined && address.length >= 42 ? (
-          <div>
+          <div className="center">
             <NFTDetailsView
               Name={nft.name}
               Tokenid={nft.token_id}
