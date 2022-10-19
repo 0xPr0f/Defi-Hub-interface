@@ -14,6 +14,7 @@
     "blockies": "^0.0.2",
     "ethers": "^5.7.1",
     "moralis": "^2.6.5",
+    "query-string": "^7.1.1",
     "react": "^18.2.0",
     "react-blockies": "^1.4.1",
     "react-dom": "^18.2.0",

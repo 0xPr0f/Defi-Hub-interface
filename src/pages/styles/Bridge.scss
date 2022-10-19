@@ -2,7 +2,7 @@
 width: 500px;
 background-color: #1D1D21;
 border-radius: 20px;
-padding:30px;
+padding:20px;
 font-size: 25px;
 }
 .tinytext {
@@ -15,9 +15,21 @@ align-items: center;
 justify-content: space-between;
 }
 .dividerArrow{
-    padding: 1em 1em;
-margin: auto;
+    padding: 0.2em 0.1em;
+    width: fit-content;
 }
+.fixcontent{
+    width: fit-content;
+    display: flex;
+    gap: 1.3em;
+    align-items: center;
+
+    span{
+        font-size: 30px;
+        font-weight: 400;
+    }
+}
+
 .inputField{
     outline: none;
     margin-right: 10px;
@@ -41,7 +53,18 @@ margin: auto;
 .token{
     font-size: 30px;
     font-weight: 300;
+
 }
+
+.balance {
+    font-size: 20px;
+    border: 3px solid green;
+    display: flex;
+    float: right;
+    width:fit-content;
+}
+
+
 .null:hover{
     transform: none;
     transition: none;
@@ -52,4 +75,14 @@ margin: auto;
     width: 60%;
     border: 3px solid #73AD21;
     padding: 10px;
-  }
+}
+.approveSend{
+border: 3px solid #73AD21;
+ width: fit-content;
+ display: flex;
+ align-items: center;
+ gap: 1em;
+}
+.buttonB{
+    width: 150px;
+}

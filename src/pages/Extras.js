@@ -43,3 +43,5 @@ export const getNFTMetadataBalance = async (
   const data = await res.json();
   return JSON.parse(JSON.stringify(data));
 };
+
+export const bridgeData = () => {};

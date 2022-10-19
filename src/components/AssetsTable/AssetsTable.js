@@ -36,7 +36,15 @@ export const AssetsTable = ({ object }) => {
                         tableObject.balance *
                         10 ** -tableObject.contract_decimals
                       ).toFixed(3)}
-                      <span>&nbsp;{tableObject.contract_ticker_symbol}</span>
+                      <span>
+                        &nbsp;
+                        {tableObject.contract_ticker_symbol.length > 7
+                          ? getEllipsisTxt(
+                              tableObject.contract_ticker_symbol,
+                              4
+                            )
+                          : tableObject.contract_ticker_symbol}
+                      </span>
                     </td>
                     <td>
                       ${" "}
