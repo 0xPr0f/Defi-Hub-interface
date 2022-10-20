@@ -1,0 +1,69 @@
+.createNewWallet{
+margin: 0 auto;
+}
+.newvaultbtn{
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    height: fit-content;
+
+    span{
+    font-size: 15px;
+    }
+}
+.btnc{
+    display: flex;
+    margin-right: 0;
+    margin-left:auto;
+}
+.textHeading{
+    padding: 10em 0em;
+    font-size: 40px;
+}
+
+.cflexout{
+    display: flex;
+    align-items: center;
+    gap: 0em;
+}
+
+.cinputFieldsend{
+    outline: none;
+    padding: 0.2em 1em;
+    font-size: 22px;
+    height: 2em;
+    width: 40%;
+    font-weight: 500;
+    background-color: rgb(29,29,33);
+    border-radius: 15px;
+    border: 0px;
+    color: white;
+    box-shadow: none;
+    transition: none;
+}
+.cinputFieldsend:hover{
+    transform: none;
+    transition: none;
+    border: 0px;
+}
+.ctokenvalue{
+    text-align: right;
+    margin-right: 0;
+    margin-left:auto;
+}
+.datepicker{
+    color: white !important;
+
+}
+.inputStack{
+    padding: 1em 0em;
+}
+.MuiFormLabel-root.Mui-focused {
+    color: #1D1D21 !important;
+  }
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #1D1D21 !important;
+  }
+.MuiOutlinedInput-root{
+    color: white !important;
+}

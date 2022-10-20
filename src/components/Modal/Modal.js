@@ -1,37 +1,44 @@
 import React, { useEffect } from "react";
-import "./Modal.module.scss";
+import styles from "./Modal.module.scss";
+import { FaTimes } from "react-icons/fa";
 
-const Modal = ({ show }) => {
-  // When the user clicks on <span> (x), close the modal
+export default function Modal({
+  title,
+  show,
+  onClose,
+  children,
+  backCLoseFunction,
+}) {
   useEffect(() => {
     if (show === true) {
-      document.getElementById("myModal").style.display = "block";
+      document.getElementById("CustommyModal").style.display = "block";
     } else {
-      document.getElementById("myModal").style.display = "none";
+      document.getElementById("CustommyModal").style.display = "none";
     }
   });
-
+  const closeWin = backCLoseFunction;
   window.onclick = function (event) {
-    if (event.target === document.getElementById("myModal")) {
-      document.getElementById("myModal").style.display = "none";
+    if (event.target === document.getElementById("CustommyModal")) {
+      closeWin();
+      document.getElementById("CustommyModal").style.display = "none";
     }
   };
-  return (
-    <div id="myModal" className="modal">
-      <div className="modal-content">
-        <span
-          onClick={() =>
-            (document.getElementById("myModal").style.display = "none")
-          }
-          className="close"
-        >
-          &times;
-        </span>
-        Test text Test text Test text Test text
-        <div className="modal-body"></div>
-      </div>
-    </div>
-  );
-};
 
-export default Modal;
+  return (
+    <>
+      <div className={styles.center}>
+        <div id="CustommyModal" className={styles.Compmodal}>
+          <div className={styles.Compmodalcontent}>
+            <div className={styles.titleHeader}>
+              <span className={styles.titleText}>{title}</span>
+              <span onClick={onClose} className={styles.Compclose}>
+                <FaTimes />
+              </span>
+            </div>
+            <div>{children}</div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}

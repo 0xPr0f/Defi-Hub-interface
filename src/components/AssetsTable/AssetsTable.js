@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./AssetsTable.module.scss";
-import Blockie from "react-blockies";
 import { getEllipsisTxt } from "../../App";
 
 export const AssetsTable = ({ object }) => {

@@ -1,10 +1,18 @@
+.Head{
+ cursor: pointer;
+ margin-top: 20px;
+}
+.Table:hover{
+    background-color: #222223;
+}
 .Table {
     border: 1px solid rgba(240, 240, 240, 0.862);
     padding: 0.25em;
     margin-top: 12em;
-    padding: 0.5em 1em;
+    padding: 0.01em 1em;
+    background-color: rgb(29,29,33);
     border-radius: 7px;
-    width: 80%;
+    width: 92%;
     margin: auto;
     margin-right: 30em;
     table {
@@ -37,15 +45,18 @@
       }
     }
   }
-  .trl {
-    cursor: pointer;
-  }
-  .AccountBlock {
+.AccountBlock {
     display: flex;
     align-items:center;
-     gap: 1em;
-     img {
-      border-radius: 20px;
-  }
- 
-  }
+    gap: 1em;
+    img {
+        border-radius: 13%;
+    }
+   
+}
+th {
+    font-size: 17px;
+}
+td {
+    font-size: 18px;
+}

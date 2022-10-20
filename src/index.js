@@ -17,11 +17,14 @@ import { publicProvider } from "wagmi/providers/public";
 import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+import { infuraProvider } from "wagmi/providers/infura";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 
+const infuraId = "ad943107b0de4918afbd89f7fc16ee8b";
 // Configure chains & providers with the Alchemy provider.
 // Two popular providers are Alchemy (alchemy.com) and Infura (infura.io)
 const { chains, provider, webSocketProvider } = configureChains(defaultChains, [
+  infuraProvider({ infuraId }),
   alchemyProvider({ apiKey: "2CjGw9Qa34v-UXMLq_aFG1AkD9monu47" }),
   publicProvider(),
 ]);
@@ -31,10 +34,10 @@ const client = createClient({
   autoConnect: true,
   connectors: [
     new MetaMaskConnector({ chains }),
-    /*  new CoinbaseWalletConnector({
+    new CoinbaseWalletConnector({
       chains,
       options: {
-        appName: "wagmi",
+        appName: "DefiHub",
       },
     }),
     new WalletConnectConnector({
@@ -49,7 +52,7 @@ const client = createClient({
         name: "Injected",
         shimDisconnect: true,
       },
-    }), */
+    }),
   ],
   provider,
   webSocketProvider,

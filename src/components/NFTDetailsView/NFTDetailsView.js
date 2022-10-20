@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./NFTDetailsView.module.scss";
-import Blockies from "react-blockies";
+import Blockie from "react-blockies";
 import { getEllipsisTxt } from "../../App";
 import Footer from "../Footer/Footer";
 import { BiShow } from "react-icons/bi";
@@ -19,6 +19,9 @@ export const NFTDetailsView = ({
 }) => {
   return (
     <div>
+      <br />
+      <br />
+      <br />
       <div className={styles.Placeholder}>
         <div>
           <img
@@ -44,7 +47,7 @@ export const NFTDetailsView = ({
             <br />
             <br />
             <div className={styles.Fix}>
-              <Blockies
+              <Blockie
                 seed={"" + OwnerAddress + ""}
                 size={10}
                 scale={3}

@@ -10,7 +10,7 @@ import { getEllipsisTxt } from "../App";
 import { AssetsTable } from "../components/AssetsTable/AssetsTable";
 import { getErc20Assets } from "../CovalentAPI/CovalentAPI";
 import Footer from "../components/Footer/Footer";
-import Blockies from "react-blockies";
+import Blockie from "react-blockies";
 import Button from "../components/Button/Button";
 
 export const Overview = () => {
@@ -74,7 +74,7 @@ export const Overview = () => {
             <>
               <div className="center">
                 <div className={styles.Overview}>
-                  <Blockies
+                  <Blockie
                     seed={"" + address + ""}
                     size={10}
                     scale={3}

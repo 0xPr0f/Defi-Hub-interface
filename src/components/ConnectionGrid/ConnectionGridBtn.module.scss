@@ -5,12 +5,12 @@
     border-radius: 20px;
     font-weight: 500;
     padding: 1em 1.5em;
-    font-size: 1em !important;
+    font-size: 1.1em !important;
     cursor: pointer;
     color: #ffffff !important;
     transition: all 0.1s linear;
-    width: fit-content;
     display: flex;
+    justify-content: space-between
   }
   
   .Button, .Link {
@@ -36,9 +36,10 @@
     padding: 0.8em 1.5em !important;
     font-size: 0.9em !important;
   }
-  .Image{
-    display: flex;
-    float: left;
+  .connectionBtnSep{
+     display: flex;
+     align-items: center;
+     width: 40vw;
   }
  
   button span {

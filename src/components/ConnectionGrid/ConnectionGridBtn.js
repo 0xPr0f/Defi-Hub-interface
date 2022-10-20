@@ -20,8 +20,10 @@ export default function ConnectionGridBtn({
         ].join(" ")}
         onClick={clickFunction}
       >
-        <span>{title || children}</span>
-        <img className="Image" width="20px" height="20px" src={image} />
+        <div className={styles.connectionBtnSep}>
+          <span>{title || children}</span>
+          <img className="Image" width="20px" height="20px" src={image} />
+        </div>
       </button>
     </div>
   );

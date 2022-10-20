@@ -16,13 +16,13 @@ const ConnectionGrid = () => {
   const { connect, connectors, error, isLoading, pendingConnector } =
     useConnect();
   const { disconnect } = useDisconnect();
-  /*const image = [
+  const image = [
     "https://gateway.pinata.cloud/ipfs/QmPgxeRnkq8UGrsxzUEsowBcUnwnQPd7Dia2v19u6atsHa",
     "https://gateway.pinata.cloud/ipfs/QmYFeCsLXNz4orNpMAvgTfGp6ubEMjsU9okv6QsCg8V4ef",
     "https://gateway.pinata.cloud/ipfs/QmYsEGVGHdWMA4TzKmHz5CcK3HaTf65C7j3WdSMvzSDQBh",
     "",
-  ]; */
-  const image = ["1", "2", "3", "4"];
+  ];
+  // const image = ["1", "2", "3", "4"];
   if (isConnected) {
     console.log(connector);
     return (
@@ -38,12 +38,13 @@ const ConnectionGrid = () => {
 
   return (
     <div>
+      <br />
       {connectors.map((connector, index) => (
         <ConnectionGridBtn
           title={connector.name}
           disabled={!connector.ready}
           key={connector.id}
-          clickFunction={() => connect({ connector })}
+          clickFunction={() => connect({ connector: connector })}
           image={image[index]}
         >
           {console.log(index)}
@@ -54,7 +55,11 @@ const ConnectionGrid = () => {
         </ConnectionGridBtn>
       ))}
 
-      {error && <div>{error.message}</div>}
+      {error && (
+        <div style={{ padding: "1em 2em", color: "red" }}>
+          <span>{error.message}</span>
+        </div>
+      )}
     </div>
   );
 };

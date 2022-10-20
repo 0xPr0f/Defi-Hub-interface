@@ -18,6 +18,11 @@ export const Bridge = () => {
   const queryParams = new URLSearchParams(search);
   const [token, setToken] = useState("GLTV1");
   useEffect(() => {
+    if (token === null) {
+      window.location.reload();
+      setToken("GLTV1");
+      navigate(`/bridge?token=GLTV1&sourceNetwork=BSCTN&destNetwork=POLYTN`);
+    }
     if (queryParams.get("token") !== "null") {
       setToken(queryParams.get("token"));
     } else {
@@ -37,6 +42,7 @@ export const Bridge = () => {
     <>
       <div style={{ minHeight: "120vh" }}>
         <br />
+        <br />
         <div className="center fixcontent">
           <span>Send</span>
           <Dropdown className={"drop"} />
@@ -53,6 +59,7 @@ export const Bridge = () => {
                   placeholder="0.0"
                   className="inputField"
                   type="text"
+                  spellCheck="false"
                   value={amount}
                   onChange={(e) => {
                     const re = /^\d*(\.)?(\d{0,10})?$/;
@@ -88,6 +95,7 @@ export const Bridge = () => {
                   placeholder="0.0"
                   className="inputField null"
                   type="text"
+                  spellCheck="false"
                   value={formatToCommas(amount)}
                   disabled
                 />

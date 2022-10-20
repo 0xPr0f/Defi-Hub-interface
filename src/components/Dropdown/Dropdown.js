@@ -28,12 +28,17 @@ export const Dropdown = ({ className }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   useEffect(() => {
     const queryParams = new URLSearchParams(search);
     navigate(
-      `/bridge?token=${filterType}&sourceNetwork=BSCTN&destNetwork=POLYTN`
+      `/bridge?token=${
+        filterType ? filterType : queryParams.get("token")
+      }&sourceNetwork=BSCTN&destNetwork=POLYTN`
     );
+  }, []);
+  useEffect(() => {
+    const queryParams = new URLSearchParams(search);
+
     if (queryParams.get("token") !== "null") {
       setFilterType(queryParams.get("token"));
     } else {

@@ -1,11 +1,17 @@
 import "./App.css";
-import { useState, useEffect } from "react";
-import Modal from "./components/Modal/Modal";
+import { useEffect } from "react";
 import ConnectionGrid from "./components/ConnectionGrid/ConnectionGrid";
-import { useAccount, useEnsAvatar, useEnsName, useDisconnect } from "wagmi";
+import {
+  useAccount,
+  useEnsAvatar,
+  useEnsName,
+  useDisconnect,
+  useConnect,
+} from "wagmi";
+import Blockie from "react-blockies";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { Routes, Route, Link } from "react-router-dom";
-
+import { FaTimes } from "react-icons/fa";
 import { Overview } from "./pages/Overview";
 import { Send } from "./pages/Send";
 import { Swap } from "./pages/Swap";
@@ -13,6 +19,7 @@ import { Vault } from "./pages/Vault";
 import { NFTView } from "./pages/NFTView";
 import { Bridge } from "./pages/Bridge";
 import { Earn } from "./pages/Earn";
+import VaultView from "./pages/VaultView";
 
 function App() {
   // const { data: ensAvatar } = useEnsAvatar({ addressOrName: address });
@@ -61,12 +68,18 @@ function App() {
             Connect
           </span>
         ) : (
-          <div className="buttonlol">
-            <span className="connect ">{getEllipsisTxt(address, 5)}</span>
-            <RiArrowDropDownLine className="arrow" size={"30px"} />
+          <div className="buttonAddress">
+            <Blockie
+              seed={"" + address + ""}
+              size={10}
+              scale={3}
+              className="Blockie"
+            />
+            <p className="connect">{getEllipsisTxt(address, 5)}</p>
+            <RiArrowDropDownLine size={"30px"} />
           </div>
         )}
-
+        <br />
         <span>
           <Link className="un" to={"/" + address + "/overview"}>
             Overview
@@ -111,6 +124,7 @@ function App() {
                 path="/:address/:token_id/overview"
                 element={<NFTView />}
               />
+              <Route path="/vault/:vault_address" element={<VaultView />} />
               {/*} <Route path="/explore" element={<Vault />} /> */}
               <Route path="/earn" element={<Earn />} />
               <Route path="/send" element={<Send />} />
@@ -129,9 +143,13 @@ function App() {
             }
             className="close"
           >
-            &times;
+            <FaTimes />
           </span>
-          <p>Connect to Wallet</p>
+
+          <p className="textconnect">Connect to Wallet</p>
+          <span className="pls">
+            please connect your wallet before proceding
+          </span>
           <ConnectionGrid />
         </div>
       </div>

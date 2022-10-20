@@ -17,6 +17,7 @@ function Drawer({ status, value, balance, token, valueHandler }) {
             placeholder="0.00"
             onChange={valueHandler}
             value={!!value ? value : ""}
+            spellCheck="false"
             disabled={status.toLowerCase() === "to"}
           />
           <div className={styles.DrawerFormDropper}>
