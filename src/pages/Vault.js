@@ -13,8 +13,15 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 
 //wagmi contract interactions
-import { usePrepareContractWrite, useContractWrite } from "wagmi";
-// end of
+import {
+  usePrepareContractWrite,
+  useContractWrite,
+  useContractRead,
+} from "wagmi";
+import { createVaultAbi, vaultCreatedAbi } from "../utils/Abis";
+import { VaultFactoryAddress } from "../utils/Addresses";
+import { binanceSmartChain } from "..";
+// end of wagmi contract interactions
 
 export const Vault = () => {
   const [show, setShow] = useState(false);
@@ -23,20 +30,23 @@ export const Vault = () => {
     dayjs.unix(new Date().getTime() / 1000)
   );
   const [epochDateValue, setEpochDateValue] = useState("");
-
-  const { config } = usePrepareContractWrite({
-    address: "0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2",
-    abi: [
-      {
-        name: "mint",
-        type: "function",
-        stateMutability: "nonpayable",
-        inputs: [],
-        outputs: [],
-      },
-    ],
-    functionName: "mint",
+  /*
+  const { config, error } = usePrepareContractWrite({
+    address: VaultFactoryAddress,
+    abi: createVaultAbi,
+    functionName: "createVault",
+    args: [69], //Arguments to pass to function call.
+    chainId: binanceSmartChain.id,
   });
+
+  const { data, isError, isLoading } = useContractRead({
+    address: VaultFactoryAddress,
+    abi: vaultCreatedAbi,
+    functionName: "CreatedVaults",
+    args: ["0xA0Cf798816D4b9b9866b5330EEa46a18382f251e"],
+  });
+*/
+  //  const { data, isLoading, isSuccess, write } = useContractWrite(config);
 
   return (
     <>
@@ -48,8 +58,10 @@ export const Vault = () => {
           <CustomBtn
             clickFunction={() => {
               setShow(true);
+              // write?.();
             }}
             className="btnc"
+            // disabled={!write}
           >
             <div className="newvaultbtn">
               <BsPlusLg />
@@ -97,10 +109,10 @@ export const Vault = () => {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Stack spacing={3}>
                     <DesktopDatePicker
-                      className="datepicker"
+                      // className="datepicker"
                       label="Lock end date"
                       value={dateValue}
-                      minDate={dayjs("2014-05-11")}
+                      minDate={dayjs("2015-05-11")}
                       onChange={(newValue) => {
                         setDateValue(newValue);
                         setEpochDateValue(

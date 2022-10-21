@@ -7,9 +7,11 @@ export default function CustomBtn({
   className,
   children,
   clickFunction,
+  disabled,
 }) {
   return (
     <button
+      disabled={disabled}
       className={[
         styles.Button,
         className,

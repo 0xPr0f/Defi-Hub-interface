@@ -8,6 +8,7 @@ import {
   useDisconnect,
   useConnect,
 } from "wagmi";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Blockie from "react-blockies";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { Routes, Route, Link } from "react-router-dom";
@@ -20,6 +21,7 @@ import { NFTView } from "./pages/NFTView";
 import { Bridge } from "./pages/Bridge";
 import { Earn } from "./pages/Earn";
 import VaultView from "./pages/VaultView";
+import { Faucet } from "./pages/Faucet";
 
 function App() {
   // const { data: ensAvatar } = useEnsAvatar({ addressOrName: address });
@@ -39,7 +41,7 @@ function App() {
       </div>
     );
   }
-*/
+
   // When the user clicks anywhere outside of the modal, close it
 
   useEffect(() => {
@@ -53,10 +55,20 @@ function App() {
       document.getElementById("myModal").style.display = "none";
     }
   };
+  */
   return (
     <div className="App">
       <div className="sidenav">
-        {!isConnected ? (
+        <br />
+        <div className="buttonAddress">
+          <ConnectButton
+            showBalance={false}
+            chainStatus={{ smallScreen: "icon", largeScreen: "icon" }}
+            accountStatus={{ smallScreen: "avatar", largeScreen: "full" }}
+          />
+        </div>
+        {console.log(address, isConnected)}
+        {/*} {!isConnected ? (
           <span
             onClick={() => {
               if (!isConnected) {
@@ -65,10 +77,10 @@ function App() {
             }}
             className="connect"
           >
-            Connect
+          
           </span>
         ) : (
-          <div className="buttonAddress">
+        
             <Blockie
               seed={"" + address + ""}
               size={10}
@@ -78,36 +90,44 @@ function App() {
             <p className="connect">{getEllipsisTxt(address, 5)}</p>
             <RiArrowDropDownLine size={"30px"} />
           </div>
-        )}
+        )} */}
         <br />
         <span>
-          <Link className="un" to={"/" + address + "/overview"}>
+          <Link
+            className="un"
+            to={isConnected ? "/" + address + "/overview" : null}
+          >
             Overview
           </Link>
         </span>
         <span>
-          <Link className="un" to="/earn">
+          <Link className="un" to={isConnected ? "/earn" : null}>
             Earn
           </Link>
         </span>
         <span>
-          <Link className="un" to={"/send"}>
+          <Link className="un" to={isConnected ? "/send" : null}>
             Send
           </Link>
         </span>
         <span>
-          <Link className="un" to="/swap">
+          <Link className="un" to={isConnected ? "/swap" : null}>
             Swap
           </Link>
         </span>
         <span>
-          <Link className="un" to="/vault">
+          <Link className="un" to={isConnected ? "/vault" : null}>
             Vault
           </Link>
         </span>
         <span>
-          <Link className="un" to="/bridge">
+          <Link className="un" to={isConnected ? "/bridge" : null}>
             Bridge
+          </Link>
+        </span>
+        <span>
+          <Link className="un" to={isConnected ? "/faucet" : null}>
+            Faucet
           </Link>
         </span>
         <div className="your-div">
@@ -131,10 +151,12 @@ function App() {
               <Route path="/swap" element={<Swap />} />
               <Route path="/vault" element={<Vault />} />
               <Route path="/bridge" element={<Bridge />} />
+              <Route path="/faucet" element={<Faucet />} />
             </Routes>
           </div>
         </div>
       </div>
+      {/*}
       <div id="myModal" className="modal">
         <div className="modal-content">
           <span
@@ -148,11 +170,12 @@ function App() {
 
           <p className="textconnect">Connect to Wallet</p>
           <span className="pls">
-            please connect your wallet before proceding
+            please connect your wallet before proceeding
           </span>
           <ConnectionGrid />
         </div>
       </div>
+          */}
     </div>
   );
 }

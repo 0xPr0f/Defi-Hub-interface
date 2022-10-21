@@ -1,0 +1,15 @@
+.WithdrawBox{
+    border: 2px solid green;
+display: flex;
+align-items: center;
+gap: 3em;
+justify-content: center;
+}
+
+
+.withdrawEth{
+    line-height: 2em;
+}
+.withdrawToken{
+    line-height: 2em;
+}
