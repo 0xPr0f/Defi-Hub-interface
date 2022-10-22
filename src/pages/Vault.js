@@ -11,42 +11,95 @@ import Stack from "@mui/material/Stack";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-
+import { useEffect } from "react";
+import { getErc20Assets } from "../CovalentAPI/CovalentAPI";
+import { TokenSelectBtn } from "../components/TokenSelect/TokenSelect";
+import { getEllipsisTxt } from "../App";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 //wagmi contract interactions
-import {
-  usePrepareContractWrite,
-  useContractWrite,
-  useContractRead,
-} from "wagmi";
-import { createVaultAbi, vaultCreatedAbi } from "../utils/Abis";
+import { erc20ABI, useAccount, useSigner } from "wagmi";
 import { VaultFactoryAddress } from "../utils/Addresses";
-import { binanceSmartChain } from "..";
+import { ethers } from "ethers";
+import { VaultFactoryABI } from "../utils/Abis";
 // end of wagmi contract interactions
 
 export const Vault = () => {
   const [show, setShow] = useState(false);
   const [amount, setAmount] = useState("");
+  const { address, connector, isConnected } = useAccount();
   const [dateValue, setDateValue] = React.useState(
     dayjs.unix(new Date().getTime() / 1000)
   );
+  const { data: signer } = useSigner();
+  const [showSecondModal, setShowSecondModal] = useState(false);
   const [epochDateValue, setEpochDateValue] = useState("");
-  /*
-  const { config, error } = usePrepareContractWrite({
-    address: VaultFactoryAddress,
-    abi: createVaultAbi,
-    functionName: "createVault",
-    args: [69], //Arguments to pass to function call.
-    chainId: binanceSmartChain.id,
-  });
+  const [currentTokenImage, setCurrentTokenImage] = useState("");
+  const [currentTokenSymbol, setCurrentTokenSymbol] = useState("Select Token");
+  const [tokenAddress, setTokenAddress] = useState("");
+  const [toAddress, setToAddress] = useState("");
+  const [tokenDecimal, setTokenDecimal] = useState("");
+  const [acountBalance, setAcountBalance] = useState([]);
+  const [vaults, setVaults] = useState();
 
-  const { data, isError, isLoading } = useContractRead({
-    address: VaultFactoryAddress,
-    abi: vaultCreatedAbi,
-    functionName: "CreatedVaults",
-    args: ["0xA0Cf798816D4b9b9866b5330EEa46a18382f251e"],
+  useEffect(() => {
+    if (show === true) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
   });
-*/
-  //  const { data, isLoading, isSuccess, write } = useContractWrite(config);
+  const accountload = async () => {
+    if (isConnected && address !== undefined && address.length >= 42) {
+      const lol = await getErc20Assets(address, 1);
+      setAcountBalance(lol);
+    }
+  };
+
+  useEffect(() => {
+    if (isConnected && address !== undefined && address.length >= 42) {
+      accountload();
+    }
+  });
+  const VaultContract = new ethers.Contract(
+    VaultFactoryAddress,
+    VaultFactoryABI,
+    signer
+  );
+  const createVault = async () => {
+    const createVault = await VaultContract.createVault(
+      amount,
+      tokenAddress,
+      epochDateValue
+    );
+    console.log(createVault.wait());
+  };
+  useEffect(() => {
+    vaultCreated();
+  });
+  const vaultCreated = async () => {
+    const vaultscreated = await VaultContract.CreatedVaults(address);
+    setVaults(vaultscreated);
+  };
+
+  /* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function (event) {
+    // if (!event.target.matches(".dropbtn")) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains("show")) {
+        openDropdown.classList.remove("show");
+        //   }
+      }
+    }
+  };
 
   return (
     <>
@@ -86,11 +139,53 @@ export const Vault = () => {
             <Modal
               title={"Create vault"}
               show={show}
+              size="small"
               onClose={() => setShow(false)}
               backCLoseFunction={() => setShow(false)}
             >
               <div className="cdropdownAdjustsend cflexout">
-                <span>PHLDV</span>
+                <div className="dropdown">
+                  <button onClick={myFunction} className="dropbtn">
+                    <span className="currenttokenTest">
+                      {tokenAddress ? (
+                        <img
+                          width="30px"
+                          height="30px"
+                          src={currentTokenImage}
+                        />
+                      ) : null}
+                      <span>
+                        {currentTokenSymbol.length > 10 &&
+                        currentTokenSymbol !== "Select Token"
+                          ? getEllipsisTxt(currentTokenSymbol, 4)
+                          : currentTokenSymbol}
+                      </span>
+                      <KeyboardArrowDownIcon />
+                    </span>
+                  </button>
+                  <div id="myDropdown" className="dropdown-content">
+                    {acountBalance.map((bal, index) => (
+                      <span
+                        className="spanRenderTokens"
+                        onClick={() => {
+                          setShowSecondModal(false);
+                          setCurrentTokenImage(bal.logo_url);
+                          setTokenAddress(bal.contract_address);
+                          setCurrentTokenSymbol(bal.contract_ticker_symbol);
+                          setTokenDecimal(bal.contract_decimals);
+                          myFunction();
+                          console.log(currentTokenSymbol);
+                        }}
+                        key={index}
+                      >
+                        {" "}
+                        {bal.contract_ticker_symbol.length > 10
+                          ? getEllipsisTxt(bal.contract_ticker_symbol, 5)
+                          : bal.contract_ticker_symbol}
+                      </span>
+                    ))}
+                  </div>
+                </div>
                 <input
                   placeholder="0.0"
                   className="cinputFieldsend ctokenvalue"
@@ -127,10 +222,7 @@ export const Vault = () => {
               <div>
                 <CustomBtn
                   clickFunction={() => {
-                    //   console.log(epochDateValue.getTime() / 1000.0);
-                    var myDate = new Date(dateValue);
-                    var myEpoch = myDate.getTime() / 1000.0;
-                    console.log(myEpoch);
+                    createVault();
                   }}
                   className="btnc"
                 >
@@ -148,6 +240,13 @@ export const Vault = () => {
       <div>
         <Footer />
       </div>
+      <Modal
+        title={"Select a Token"}
+        show={show}
+        onClose={() => setShowSecondModal(false)}
+        backCLoseFunction={() => setShowSecondModal(false)}
+        size="small"
+      ></Modal>
     </>
   );
 };

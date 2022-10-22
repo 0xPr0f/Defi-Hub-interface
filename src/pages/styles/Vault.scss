@@ -58,6 +58,14 @@ margin: 0 auto;
 .inputStack{
     padding: 1em 0em;
 }
+.currenttokenTest{
+    font-size: 20px;
+    border: 2px solid blue;
+    display: flex;
+    align-items: center;
+    gap: 0.1em;
+    width: 50%;
+}
 /*
 .MuiFormLabel-root.Mui-focused {
     color: #1D1D21 !important;
@@ -69,3 +77,41 @@ margin: 0 auto;
     color: white !important;
 }
 */
+.dropbtn {
+    background-color: #2D2D32;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .dropdown {
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #1D1D21;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+.dropdown span:hover {background-color: #2D2D32;}
+  
+  .show {display: block;}
+  .myDropdown{
+    position:relative;
+    z-index: 20;
+    position: fixed;
+  }
+  .spanRenderTokens{
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0.1em 0.1em;
+    color: white;
+    display: block;
+    text-decoration: none;
+  }

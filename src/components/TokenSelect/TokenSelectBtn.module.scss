@@ -1,0 +1,84 @@
+.tokenselectbtnraw{
+    border-radius: 0px !important;
+    border: 2px solid blue;
+}
+@mixin Button($bg) {
+    background-color: $bg !important;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    font-weight: 500;
+    padding: 0.1em 0.5em;
+    font-size: 0.8em !important;
+    cursor: pointer;
+    color: #ffffff !important;
+    transition: all 0.1s linear;
+    width: 96%
+
+  }
+  
+  .Button{
+    @include Button(#2D2D32);
+  
+    &:hover {
+      color: rgb(255, 255, 255);
+      background: #222223 !important;
+    }
+  }
+  
+  .secondary {
+    background-color: #1d1d21 !important;
+    color: #000000 !important;
+  
+    &:hover {
+      background-color: #16161A !important;
+      color: #ffffff !important;
+    }
+  }
+  
+  .smallBtn {
+    padding: 0.1em 0.1em !important;
+    font-size: 0.9em !important;
+  }
+
+  
+
+ .componentDiv{
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    border: 2px solid red;
+    &Image{
+        border-radius: 30%;
+    }
+ }
+ .tokenInlayout{
+    text-align: left;
+    border: 2px solid blue;
+
+    &TokenSymbol{
+          font-size: 20px;
+          font-weight: 700;
+    }
+    &TokenName{
+font-size: 15px;
+    }
+    &TokenBalance{
+      float:right;
+    }
+ }
+
+ @media screen and (max-width: 992px) {
+
+}
+
+@media screen and (max-width: 720px) {
+
+}
+.FixMarginalWidth{
+  width: 100%;
+  border: 2px solid orange;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}

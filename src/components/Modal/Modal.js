@@ -8,6 +8,7 @@ export default function Modal({
   onClose,
   children,
   backCLoseFunction,
+  size,
 }) {
   useEffect(() => {
     if (show === true) {
@@ -24,18 +25,29 @@ export default function Modal({
     }
   };
 
+  useEffect(() => {
+    if (size === "small") {
+      document.getElementById("scrollable").style.height = 35 + "%";
+    } else if (size === "medium") {
+      document.getElementById("scrollable").style.height = 50 + "%";
+    } else if (size === "large") {
+      document.getElementById("scrollable").style.height = 60 + "%";
+    } else {
+      document.getElementById("scrollable").style.height = 55 + "%";
+    }
+  });
   return (
     <>
       <div className={styles.center}>
         <div id="CustommyModal" className={styles.Compmodal}>
-          <div className={styles.Compmodalcontent}>
+          <div id="scrollable" className={styles.Compmodalcontent}>
             <div className={styles.titleHeader}>
               <span className={styles.titleText}>{title}</span>
               <span onClick={onClose} className={styles.Compclose}>
                 <FaTimes />
               </span>
             </div>
-            <div>{children}</div>
+            <div className={styles.mainContenttoScroll}>{children}</div>
           </div>
         </div>
       </div>

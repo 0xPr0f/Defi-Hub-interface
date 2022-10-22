@@ -130,8 +130,11 @@ function App() {
             Faucet
           </Link>
         </span>
+        <br />
+        <br />
+        <br />
         <div className="your-div">
-          <span className="namefooter"> TESTTEST </span>
+          <span className="namefooter"> DEFI HUB</span>
         </div>
       </div>
 

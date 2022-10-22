@@ -5,6 +5,12 @@
     border-radius: 20px;
     padding:20px;
     font-size: 25px;
+
+    &Assets{
+        display: flex;
+        padding: 0.3em 1em;
+        justify-content: space-between;
+    }
 }
     .tinytextsend {
         font-size: 20px;
@@ -61,7 +67,7 @@
 .flexout{
     display: flex;
     align-items: center;
-    gap: 0em;
+    gap: 3em;
 }
 .holder{
     display: flex;
@@ -79,6 +85,7 @@
     text-align: right;
     margin-right: 0;
     margin-left:auto;
+    width: 100%;
 }
 .topcenter {
     text-align: left;
@@ -90,4 +97,18 @@
 }
 .buttonBsend{
     margin: 0 auto;
+}
+.currenttoken{
+    font-size: 23px;
+    border: 2px solid blue;
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    width: 100%;
+}
+.estimategas{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 18px;
 }

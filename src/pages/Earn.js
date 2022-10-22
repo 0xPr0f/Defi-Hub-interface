@@ -7,18 +7,15 @@ export const Earn = () => {
   const [show, setShow] = useState(true);
   return (
     <>
-      <div className="center" style={{ minHeight: "120vh" }}>
+      <div className="center" style={{ minHeight: "80vh" }}>
         Earn
-        <button
-          onClick={() => {
-            setShow(true);
-            console.log("show modal");
-          }}
-        >
-          Show Modal
-        </button>
+        <img src="https://gateway.pinata.cloud/ipfs/QmZnRxkRrxjhbAQfpaVGh9uqDBzf6yMprnLNjwaVsReXxV" />
+        <span style={{ fontSize: "40px" }}>
+          Still in production, Devs at work
+        </span>
       </div>
       <Modal
+        size="medium"
         title={"Info"}
         show={show}
         onClose={() => setShow(false)}

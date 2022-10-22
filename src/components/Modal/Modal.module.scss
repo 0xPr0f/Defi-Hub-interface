@@ -21,8 +21,14 @@
   margin: 2em 35%;
   padding: 40px;
   z-index: 5;
+  overflow-x: hidden;
   border-radius: 20px;
   width: 30%;
+}
+.mainContenttoScroll {
+  max-height: 80%;
+  overflow-y: auto;
+ 
 }
 
 /* The Close Button */
@@ -45,7 +51,7 @@
 }
 .titleHeader {
   display: flex;
-  padding: 5px;
-  margin-bottom: 40px;
+  padding: 3px;
+  margin-bottom: 20px;
   justify-content: space-between;
 }

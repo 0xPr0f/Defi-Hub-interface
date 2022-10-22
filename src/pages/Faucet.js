@@ -1,20 +1,32 @@
 import React, { useState } from "react";
 import CustomBtn from "../components/CustomConnectBtn/CustomBtn";
 import Footer from "../components/Footer/Footer";
-import { useContractWrite, usePrepareContractWrite } from "wagmi";
-import { faucetAbi } from "../utils/Abis";
-import { BridgeRouterBAddress } from "../utils/Addresses";
-
+import { ethers } from "ethers";
+import { useSigner } from "wagmi";
+import { bridgeData } from "./Extras";
+import {
+  BridgeRouterBAddress,
+  GLTV1AddressOnBinance,
+  GLTV2AddressOnBinance,
+} from "../utils/Addresses";
+import { BridgeRouterBABI } from "../utils/Abis";
 export const Faucet = () => {
-  /* const { config } = usePrepareContractWrite({
-    address: BridgeRouterBAddress,
-    abi: faucetAbi,
-    functionName: "faucet",
-  });
-
-  const { data, isLoading, isSuccess, write } = useContractWrite(config);
-*/
   const [toAddress, setToAddress] = useState("");
+  const { data: signer, isError, isLoading } = useSigner();
+
+  const faucet = async () => {
+    if (toAddress.length < 42) return;
+    const FaucetContract = new ethers.Contract(
+      BridgeRouterBAddress,
+      BridgeRouterBABI,
+      signer
+    );
+    const faucet = await FaucetContract.faucet(
+      [GLTV1AddressOnBinance, GLTV2AddressOnBinance],
+      toAddress
+    );
+    console.log(faucet.wait());
+  };
   return (
     <div>
       <br />
@@ -51,7 +63,7 @@ export const Faucet = () => {
             justifyContent: "center",
           }}
         >
-          <CustomBtn /*clickFunction={() => write?.()} */ title="Request" />
+          <CustomBtn clickFunction={() => faucet()} title="Request" />
         </div>
       </div>
       <Footer />
