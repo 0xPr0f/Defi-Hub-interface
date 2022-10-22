@@ -11,7 +11,7 @@ import "./styles/Bridge.scss";
 import CustomBtn from "../components/CustomConnectBtn/CustomBtn";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useSigner, useAccount, erc20ABI } from "wagmi";
+import { useSigner, useAccount, erc20ABI, chainId } from "wagmi";
 import {
   BridgeRouterBAddress,
   BridgeRouterPAddress,
@@ -23,6 +23,7 @@ import {
 import { BridgeRouterBABI } from "../utils/Abis";
 import { ethers } from "ethers";
 import { useBalance } from "wagmi";
+import { getErc20AssetsParticular } from "../CovalentAPI/CovalentAPI";
 
 export const Bridge = () => {
   const { search } = useLocation();
@@ -30,38 +31,36 @@ export const Bridge = () => {
   const queryParams = new URLSearchParams(search);
   const [token, setToken] = useState("GLTV1");
   const [allowance, setAllowance] = useState("20000");
-  const [BalanceGLTVP, setBalanceGLTVP] = useState("0");
-  const [BalanceGLTVB, setBalanceGLTVB] = useState("0");
+  const [BalanceGLTVP, setBalanceGLTVP] = useState("00");
+  const [BalanceGLTVB, setBalanceGLTVB] = useState("00");
   const { data: signer, isError, isLoading } = useSigner();
   const { address } = useAccount();
-  // a pair
-  const balanceGLTV1p = useBalance({
-    addressOrName: address,
-    chainId: 80001,
-    token: GLTV1AddressOnPolygon,
-    watch: true,
+
+  useEffect(() => {
+    balanceAssets();
   });
-  const balanceGLTV1b = useBalance({
-    addressOrName: address,
-    chainId: 97,
-    token: GLTV1AddressOnBinance,
-    watch: true,
-  });
-  //--------------------------------
-  /////// Another pair
-  const balanceGLTV2p = useBalance({
-    addressOrName: address,
-    chainId: 80001,
-    token: GLTV2AddressOnPolygon,
-    watch: true,
-  });
-  const balanceGLTV2b = useBalance({
-    addressOrName: address,
-    chainId: 97,
-    token: GLTV1AddressOnBinance,
-    watch: true,
-  });
-  //======================================
+
+  const balanceAssets = async () => {
+    if (token === "GLTV1") {
+      setBalanceGLTVB(
+        await getErc20AssetsParticular(address, 97, GLTV1AddressOnBinance)
+      );
+      setBalanceGLTVP(
+        await getErc20AssetsParticular(address, 97, GLTV1AddressOnPolygon)
+      );
+      console.log(BalanceGLTVP);
+      console.log(BalanceGLTVB);
+    } else if (token === "GLTV2") {
+      setBalanceGLTVB(
+        await getErc20AssetsParticular(address, 97, GLTV2AddressOnBinance)
+      );
+      setBalanceGLTVP(
+        await getErc20AssetsParticular(address, 97, GLTV2AddressOnPolygon)
+      );
+      console.log(BalanceGLTVP);
+      console.log(BalanceGLTVB);
+    }
+  };
 
   useEffect(() => {
     if (token === null) {
@@ -84,17 +83,14 @@ export const Bridge = () => {
   function formatToCommas(x) {
     return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   }
-  /*
+
   useEffect(() => {
     checkAllowance();
   });
 
- const checkAllowance = async () => {
+  const checkAllowance = async () => {
     if (token === "GLTV1") {
-
-      setBalanceGLTVP(balanceGLTV1p);
-      setBalanceGLTVB(balanceGLTV1b);
-
+      console.log("lololololololol");
       const ERC20Contract = new ethers.Contract(
         GLTV1AddressOnBinance,
         erc20ABI,
@@ -104,13 +100,10 @@ export const Bridge = () => {
         address,
         BridgeRouterBAddress
       );
-      setAllowance(tokenAllowance);
+      console.log(tokenAllowance.toString());
+      setAllowance(tokenAllowance.toString());
     }
     if (token === "GLTV2") {
-
-      setBalanceGLTVP(balanceGLTV2p);
-      setBalanceGLTVB(balanceGLTV2b);
-
       const ERC20Contract = new ethers.Contract(
         GLTV2AddressOnBinance,
         erc20ABI,
@@ -120,12 +113,12 @@ export const Bridge = () => {
         address,
         BridgeRouterBAddress
       );
-      setAllowance(tokenAllowance);
+      setAllowance(tokenAllowance.toString());
       console.log(allowance);
     }
   };
-  const Approve = async () =>{
-      if (token === "GLTV1") {
+  const Approve = async () => {
+    if (token === "GLTV1") {
       const ERC20Contract = new ethers.Contract(
         GLTV1AddressOnBinance,
         erc20ABI,
@@ -133,12 +126,12 @@ export const Bridge = () => {
       );
       const tokenApprove = await ERC20Contract.approve(
         BridgeRouterBAddress,
-        "1000000000000000"
+        "1000000000000000000000000000000000000000"
       );
       console.log(tokenApprove.wait());
-      }
-        if (token === "GLTV2") {
- const ERC20Contract = new ethers.Contract(
+    }
+    if (token === "GLTV2") {
+      const ERC20Contract = new ethers.Contract(
         GLTV2AddressOnBinance,
         erc20ABI,
         signer
@@ -146,11 +139,11 @@ export const Bridge = () => {
 
       const tokenApprove = await ERC20Contract.approve(
         BridgeRouterBAddress,
-        "1000000000000000"
+        "1000000000000000000000000000000000000"
       );
       console.log(tokenApprove.wait());
-        }
-  }
+    }
+  };
 
   const Bridge = async () => {
     if (token === "GLTV1") {
@@ -160,34 +153,42 @@ export const Bridge = () => {
         BridgeRouterBABI,
         signer
       );
+      const sentvalue = ethers.utils.parseUnits(amount, 18);
+      console.log(sentvalue.toString(), "This was sent with v1");
       const bridge = await BridgeContract.bridgeToken(
         "Polygon",
         BridgeRouterPAddress,
-        GLTV1AddressOnPolygon,
-        amount,
-        address
+        GLTV1AddressOnBinance,
+        sentvalue,
+        address,
+        {
+          value: ethers.utils.parseEther("0.01"),
+        }
       );
       console.log(bridge.wait());
-    }
-    if (token === "GLTV2") {
+    } else if (token === "GLTV2") {
       console.log(`sent : ${amount} GLTV2 to ploygon chain `);
       const BridgeContract = new ethers.Contract(
         BridgeRouterBAddress,
         BridgeRouterBABI,
         signer
       );
-     
+      const sentvalue = ethers.utils.parseUnits(amount, 18);
+      console.log(sentvalue.toString(), "This was sent with v2");
       const bridge = await BridgeContract.bridgeToken(
         "Polygon",
         BridgeRouterPAddress,
-        GLTV2AddressOnPolygon,
-        amount,
-        address
+        GLTV2AddressOnBinance,
+        sentvalue,
+        address,
+        {
+          value: ethers.utils.parseEther("0.01"),
+        }
       );
       console.log(bridge.wait());
     }
   };
-*/
+
   return (
     <>
       <div style={{ minHeight: "120vh" }}>
@@ -203,7 +204,7 @@ export const Bridge = () => {
           <div className="dropdownAdjust">
             <FromDropdown />
             <div>
-              <span className="balance">Balance : {BalanceGLTVB}</span>
+              {/*}   <span className="balance">Balance : {BalanceGLTVB}</span> */}
               <div>
                 <input
                   placeholder="0.0"
@@ -238,7 +239,7 @@ export const Bridge = () => {
           <div className="dropdownAdjust">
             <ToDropdown />
             <div>
-              <span className="balance">Balance : {BalanceGLTVP}</span>
+              {/* }  <span className="balance">Balance : {BalanceGLTVP}</span> */}
               <br />
               <div>
                 <input
@@ -260,10 +261,10 @@ export const Bridge = () => {
         </div>
         <br />
         <div className="center approveSend">
-          {allowance > amount ? (
+          {allowance < amount ? (
             <CustomBtn
               clickFunction={() => {
-                Bridge();
+                Approve();
               }}
               className="buttonB"
               title="Approve"

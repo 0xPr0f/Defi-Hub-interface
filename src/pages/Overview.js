@@ -8,7 +8,7 @@ import { getNFTBalance, getMetadataProps } from "./Extras";
 import NFTCard from "../components/NFTAssetCard/NFTAssetCard";
 import { getEllipsisTxt } from "../App";
 import { AssetsTable } from "../components/AssetsTable/AssetsTable";
-import { getErc20Assets } from "../CovalentAPI/CovalentAPI";
+import { getErc20Assets, getTransactions } from "../CovalentAPI/CovalentAPI";
 import Footer from "../components/Footer/Footer";
 import Blockie from "react-blockies";
 import Button from "../components/Button/Button";
@@ -19,6 +19,7 @@ export const Overview = () => {
   const [nft, setNft] = useState([]);
   const [copyValue, setCopyValue] = useState("");
   const [acount, setAcount] = useState([]);
+  const [transactions, setTransactions] = useState([]);
   const [nftImage, setNftImage] = useState([]);
 
   const nftload = async () => {
@@ -27,6 +28,15 @@ export const Overview = () => {
       setNft(lol);
     }
   };
+
+  const loadtransactions = async () => {
+    if (address !== undefined && address.length >= 42) {
+      const lol = await getTransactions(address, 97);
+      setTransactions(lol);
+      console.log(transactions);
+    }
+  };
+
   const nftimage = async (url) => {
     const lol = await getMetadataProps(`${url}`);
     setNftImage(lol);
@@ -35,7 +45,7 @@ export const Overview = () => {
 
   const accountload = async () => {
     if (address !== undefined && address.length >= 42) {
-      const lol = await getErc20Assets(address, 1);
+      const lol = await getErc20Assets(address, 97);
       setAcount(lol);
     }
   };
@@ -116,16 +126,21 @@ export const Overview = () => {
                   >
                     NFTs
                   </span>
+                  {/*}
                   <span
                     className={
                       activeTab === "transactions"
                         ? styles.ExploreTabActive
                         : styles.ExploreTabInactive
                     }
-                    onClick={() => setActiveTab("transactions")}
+                    onClick={() => {
+                      setActiveTab("transactions");
+                      loadtransactions();
+                    }}
                   >
                     Transactions
-                  </span>
+                  </span> */}
+                  {/*}
                   <div>
                     {activeTab === "transactions" ? (
                       <>
@@ -138,7 +153,7 @@ export const Overview = () => {
                     ) : (
                       <></>
                     )}
-                  </div>
+                    </div> */}
                   <div>
                     {activeTab === "token" ? (
                       <>

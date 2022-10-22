@@ -1,6 +1,5 @@
 .tokenselectbtnraw{
     border-radius: 0px !important;
-    border: 2px solid blue;
 }
 @mixin Button($bg) {
     background-color: $bg !important;
@@ -47,14 +46,12 @@
     display: flex;
     align-items: center;
     gap: 0.4em;
-    border: 2px solid red;
     &Image{
         border-radius: 30%;
     }
  }
  .tokenInlayout{
     text-align: left;
-    border: 2px solid blue;
 
     &TokenSymbol{
           font-size: 20px;
@@ -77,7 +74,6 @@ font-size: 15px;
 }
 .FixMarginalWidth{
   width: 100%;
-  border: 2px solid orange;
 display: flex;
 align-items: center;
 justify-content: space-between;

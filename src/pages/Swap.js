@@ -29,9 +29,6 @@ export const Swap = () => {
           hackathon, the page will be live when we migrate to mainnet
         </span>
       </Modal>
-
-      <VaultView />
-
       <Footer />
     </>
   );

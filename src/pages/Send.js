@@ -34,25 +34,35 @@ export const Send = () => {
     formatUnits: "gwei",
   });
 
-  const SendTrasaction = async (
-    tokenaddress,
-    toaddress,
-    value,
-    tokendecimal
-  ) => {
-    const ERC20Contract = new ethers.Contract(tokenaddress, erc20ABI, signer);
-    const FormatedValue = parseUnits("" + value * 10 ** tokendecimal + "");
-    console.log(FormatedValue);
-    console.log("----------------------------------------------------------");
-    const sentvalue = FormatedValue.toString();
-    console.log(sentvalue);
-    const tokentransfer = await ERC20Contract.transfer(toaddress, sentvalue);
-    console.log(tokentransfer.wait());
+  const SendTrasaction = async (tokenaddress, toaddress, value) => {
+    if (currentTokenSymbol !== "BNBT") {
+      console.log("not bnb");
+      const ERC20Contract = new ethers.Contract(tokenaddress, erc20ABI, signer);
+      const sentvalue = ethers.utils.parseUnits(value, Number(tokenDecimal));
+      console.log(sentvalue);
+      const tokentransfer = await ERC20Contract.transfer(toaddress, sentvalue);
+      console.log(tokentransfer.wait());
+    } else {
+      console.log("bnb");
+      const tx = {
+        from: address,
+        to: toaddress,
+        value: ethers.utils.parseEther(value),
+      };
+
+      try {
+        signer.sendTransaction(tx).then((transaction) => {
+          console.dir(transaction);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   const accountload = async () => {
     if (isConnected && address !== undefined && address.length >= 42) {
-      const lol = await getErc20Assets(address, 1);
+      const lol = await getErc20Assets(address, 97);
       setAcountBalance(lol);
     }
   };
@@ -72,7 +82,7 @@ export const Send = () => {
 
   return (
     <>
-      <div style={{ minHeight: "100vh" }}>
+      <div style={{ minHeight: "80vh" }}>
         <br />
         <br />
         <div className="center1 topcenter ">
@@ -110,17 +120,25 @@ export const Send = () => {
           <div className="swapBoxsendAssets">
             <span>Asset</span>
             <span
+              style={{ cursor: "pointer" }}
               onClick={() => {
-                setAmount(tokenBalance);
+                setAmount((Number(tokenBalance) - 0.001).toString());
               }}
             >
               max
             </span>
           </div>
           <div className="dropdownAdjustsend flexout">
-            <span className="currenttoken" onClick={() => setShow(true)}>
+            <span
+              className="currenttoken"
+              style={{ cursor: "pointer" }}
+              onClick={() => setShow(true)}
+            >
               {tokenAddress ? (
-                <img width="30px" height="30px" src={currentTokenImage} />
+                <>
+                  {null}
+                  {/*} <img width="30px" height="30px" src={currentTokenImage} /> */}
+                </>
               ) : null}
               <span>{currentTokenSymbol}</span>
               <KeyboardArrowDownIcon />

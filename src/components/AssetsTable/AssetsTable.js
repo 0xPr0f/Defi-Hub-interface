@@ -18,18 +18,23 @@ export const AssetsTable = ({ object }) => {
           {object.map((tableObject, index) => {
             return (
               <tr key={index} className={[styles.TR, "trl"]}>
-                {tableObject.quote_rate > "0" && tableObject.balance > "0" ? (
+                {tableObject.balance > "0" ? (
                   <>
                     <td className={styles.AccountBlock}>
-                      <img
+                      {/*}  <img
                         width={"40px"}
                         height={"40px"}
                         src={tableObject.logo_url}
                         alt={"#"}
-                      />
+                /> */}
                       <span>{tableObject.contract_name}</span>
                     </td>
-                    <td>${tableObject.quote_rate.toFixed(2)}</td>
+                    <td>
+                      $
+                      {tableObject?.quote_rate == null
+                        ? 0
+                        : tableObject?.quote_rate.toFixed(2)}
+                    </td>
                     <td>
                       {(
                         tableObject.balance *
@@ -42,16 +47,18 @@ export const AssetsTable = ({ object }) => {
                               tableObject.contract_ticker_symbol,
                               4
                             )
-                          : tableObject.contract_ticker_symbol}
+                          : tableObject?.contract_ticker_symbol}
                       </span>
                     </td>
                     <td>
                       ${" "}
-                      {(
-                        tableObject.balance *
-                        10 ** -tableObject.contract_decimals *
-                        tableObject.quote_rate
-                      ).toFixed(2)}
+                      {tableObject?.quote_rate == null
+                        ? 0
+                        : (
+                            tableObject?.balance *
+                            10 ** -tableObject?.contract_decimals *
+                            tableObject?.quote_rate
+                          ).toFixed(2)}
                     </td>
                   </>
                 ) : (

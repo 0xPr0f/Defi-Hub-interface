@@ -23,7 +23,7 @@ function Drawer({ status, value, balance, token, valueHandler }) {
           <div className={styles.DrawerFormDropper}>
             {token?.address ? (
               <div className={styles.availableToken}>
-                <img src={token.logoURI} alt={token.name} />
+                {/* <img src={token.logoURI} alt="#" /> */}
                 <span>{token.symbol}</span>
               </div>
             ) : (

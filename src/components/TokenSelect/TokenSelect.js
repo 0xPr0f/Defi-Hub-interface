@@ -17,7 +17,7 @@ export const TokenSelectBtn = ({
       >
         <div className={styles.componentDiv}>
           <div>
-            <img
+            {/*} <img
               onLoadedData={(e) => {
                 console.log(e);
               }}
@@ -25,7 +25,7 @@ export const TokenSelectBtn = ({
               width="40px"
               height="35px"
               src={image}
-            />
+            />  */}
           </div>
           <div className={styles.FixMarginalWidth}>
             <div className={styles.tokenInlayout}>

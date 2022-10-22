@@ -50,7 +50,7 @@ export const Vault = () => {
   });
   const accountload = async () => {
     if (isConnected && address !== undefined && address.length >= 42) {
-      const lol = await getErc20Assets(address, 1);
+      const lol = await getErc20Assets(address, 97);
       setAcountBalance(lol);
     }
   };
@@ -60,30 +60,48 @@ export const Vault = () => {
       accountload();
     }
   });
-  const VaultContract = new ethers.Contract(
-    VaultFactoryAddress,
-    VaultFactoryABI,
-    signer
-  );
+
   const createVault = async () => {
+    Approve();
+    const VaultContract = new ethers.Contract(
+      VaultFactoryAddress,
+      VaultFactoryABI,
+      signer
+    );
+    console.log(Math.trunc(Number(epochDateValue) + 2678399).toString());
     const createVault = await VaultContract.createVault(
       amount,
       tokenAddress,
-      epochDateValue
+      Math.trunc(epochDateValue).toString()
     );
     console.log(createVault.wait());
   };
   useEffect(() => {
-    vaultCreated();
+    if (!vaults) {
+      vaultCreated();
+    }
   });
+
   const vaultCreated = async () => {
+    const VaultContract = new ethers.Contract(
+      VaultFactoryAddress,
+      VaultFactoryABI,
+      signer
+    );
+
     const vaultscreated = await VaultContract.CreatedVaults(address);
-    setVaults(vaultscreated);
+    for (var i = 0; i < vaultscreated.length; i++) {
+      const vaultx = await VaultContract.vaults(vaultscreated[i]);
+    }
+  };
+
+  const display = () => {
+    console.log();
   };
 
   /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
-  function myFunction() {
+  function showTokenModal() {
     document.getElementById("myDropdown").classList.toggle("show");
   }
 
@@ -101,9 +119,23 @@ toggle between hiding and showing the dropdown content */
     }
   };
 
+  const Approve = async () => {
+    const ERC20Contract = new ethers.Contract(tokenAddress, erc20ABI, signer);
+    const tokenAllowance = await ERC20Contract.allowance(
+      address,
+      VaultFactoryAddress
+    );
+    if (Number(tokenAllowance.toString()) < amount) {
+      const tokenApprove = await ERC20Contract.approve(
+        VaultFactoryAddress,
+        "1000000000000000000000000000000000000000"
+      );
+      console.log(tokenApprove.wait());
+    }
+  };
   return (
     <>
-      <div className="center" style={{ minHeight: "120vh" }}>
+      <div className="center" style={{ minHeight: "80vh" }}>
         <br />
         <br />
         <span className="textHeading">Vault</span>
@@ -111,7 +143,6 @@ toggle between hiding and showing the dropdown content */
           <CustomBtn
             clickFunction={() => {
               setShow(true);
-              // write?.();
             }}
             className="btnc"
             // disabled={!write}
@@ -124,18 +155,34 @@ toggle between hiding and showing the dropdown content */
         </div>
         <>
           <div className="vaultcard">
-            <VaultCard />
-            <VaultCard />
-            <VaultCard />
-            <VaultCard />
-            <VaultCard />
-            <VaultCard />
-            <VaultCard />
-            <VaultCard />
-            <VaultCard />
-            <VaultCard />
-            <VaultCard />
-            <VaultCard />
+            <VaultCard
+              nameT={"Chainlink Token"}
+              symbolT={"LINK"}
+              amount={"1000"}
+              address={getEllipsisTxt(
+                "0x91B14AeCa1bC664Cf4a54FBD7006F9B307fdF19c"
+              )}
+              endtime={"01/01/2023"}
+            />
+            <VaultCard
+              nameT={"USDC Stablecoin"}
+              symbolT={"USDC"}
+              amount={"10000"}
+              address={getEllipsisTxt(
+                "0x4a54FBD791B14AbC664C0dF19cfCa19B06Fe7f30"
+              )}
+              endtime={"05/03/2023"}
+            />
+            <VaultCard
+              nameT={"DAI Stablecoin"}
+              symbolT={"DAI"}
+              amount={"10000"}
+              address={getEllipsisTxt(
+                "0xD7006F9B3019Ca191B14Aea54cbC664Cf47fdFFB"
+              )}
+              endtime={"21/01/2023"}
+            />
+
             <Modal
               title={"Create vault"}
               show={show}
@@ -145,14 +192,17 @@ toggle between hiding and showing the dropdown content */
             >
               <div className="cdropdownAdjustsend cflexout">
                 <div className="dropdown">
-                  <button onClick={myFunction} className="dropbtn">
+                  <button onClick={showTokenModal} className="dropbtn">
                     <span className="currenttokenTest">
                       {tokenAddress ? (
-                        <img
+                        <>
+                          {null}
+                          {/*} <img
                           width="30px"
                           height="30px"
                           src={currentTokenImage}
-                        />
+                      /> */}
+                        </>
                       ) : null}
                       <span>
                         {currentTokenSymbol.length > 10 &&
@@ -173,7 +223,7 @@ toggle between hiding and showing the dropdown content */
                           setTokenAddress(bal.contract_address);
                           setCurrentTokenSymbol(bal.contract_ticker_symbol);
                           setTokenDecimal(bal.contract_decimals);
-                          myFunction();
+                          showTokenModal();
                           console.log(currentTokenSymbol);
                         }}
                         key={index}

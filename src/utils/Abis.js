@@ -1,26 +1,25 @@
 export const VaultFactoryABI = [
   {
-    inputs: [],
-    stateMutability: "nonpayable",
-    type: "constructor",
-  },
-  {
     inputs: [
       {
+        internalType: "uint256",
+        name: "_createdTokenBalance",
+        type: "uint256",
+      },
+      {
         internalType: "address",
-        name: "_user",
+        name: "tokenAddress",
         type: "address",
       },
-    ],
-    name: "CreatedVaults",
-    outputs: [
       {
-        internalType: "contract Vault[]",
-        name: "",
-        type: "address[]",
+        internalType: "uint256",
+        name: "endTime",
+        type: "uint256",
       },
     ],
-    stateMutability: "view",
+    name: "createVault",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -42,30 +41,13 @@ export const VaultFactoryABI = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "OWNER",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
+    stateMutability: "payable",
+    type: "receive",
   },
   {
     inputs: [],
-    name: "VERSION",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
+    stateMutability: "nonpayable",
+    type: "constructor",
   },
   {
     inputs: [
@@ -89,24 +71,33 @@ export const VaultFactoryABI = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "_createdTokenBalance",
-        type: "uint256",
-      },
-      {
         internalType: "address",
-        name: "tokenAddress",
+        name: "_user",
         type: "address",
       },
+    ],
+    name: "CreatedVaults",
+    outputs: [
       {
-        internalType: "uint256",
-        name: "endTime",
-        type: "uint256",
+        internalType: "contract Vault[]",
+        name: "",
+        type: "address[]",
       },
     ],
-    name: "createVault",
-    outputs: [],
-    stateMutability: "nonpayable",
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "OWNER",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -134,8 +125,107 @@ export const VaultFactoryABI = [
     type: "function",
   },
   {
-    stateMutability: "payable",
-    type: "receive",
+    inputs: [
+      {
+        internalType: "contract Vault",
+        name: "",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "vaultDetails",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "_createdBalance",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "_tokenAddress",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_vaultOwner",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "_lockStartTime",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_lockEndTime",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "contract Vault",
+        name: "_user",
+        type: "address",
+      },
+    ],
+    name: "vaults",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "_createdBalance",
+            type: "uint256",
+          },
+          {
+            internalType: "address",
+            name: "_tokenAddress",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "_vaultOwner",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "_lockStartTime",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "_lockEndTime",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct VaultFactory.VaultDetails[]",
+        name: "",
+        type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "VERSION",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
   },
 ];
 
