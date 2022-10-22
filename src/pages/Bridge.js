@@ -191,7 +191,7 @@ export const Bridge = () => {
 
   return (
     <>
-      <div style={{ minHeight: "120vh" }}>
+      <div style={{ minHeight: "90vh" }}>
         <br />
         <br />
         <div className="center fixcontent">
