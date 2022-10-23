@@ -79,7 +79,7 @@ export const Overview = () => {
   return (
     <div className="Main">
       <>
-        <div style={{ minHeight: "120vh" }}>
+        <div style={{ minHeight: "90vh" }}>
           {address.length === 42 ? (
             <>
               <div className="center">
