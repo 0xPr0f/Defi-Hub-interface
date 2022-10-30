@@ -154,7 +154,6 @@ function App() {
               <Route path="/swap" element={<Swap />} />
               <Route path="/vault" element={<Vault />} />
               <Route path="/bridge" element={<Bridge />} />
-              <Route path="/" exact element={<Faucet />} />
               <Route path="/faucet" element={<Faucet />} />
             </Routes>
           </div>
