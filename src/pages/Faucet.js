@@ -25,7 +25,7 @@ export const Faucet = () => {
       [GLTV1AddressOnBinance, GLTV2AddressOnBinance],
       toAddress
     );
-    console.log(faucet.wait());
+    //(faucet.wait());
   };
   return (
     <div>

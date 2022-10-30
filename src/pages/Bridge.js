@@ -48,8 +48,6 @@ export const Bridge = () => {
       setBalanceGLTVP(
         await getErc20AssetsParticular(address, 97, GLTV1AddressOnPolygon)
       );
-      console.log(BalanceGLTVP);
-      console.log(BalanceGLTVB);
     } else if (token === "GLTV2") {
       setBalanceGLTVB(
         await getErc20AssetsParticular(address, 97, GLTV2AddressOnBinance)
@@ -57,8 +55,6 @@ export const Bridge = () => {
       setBalanceGLTVP(
         await getErc20AssetsParticular(address, 97, GLTV2AddressOnPolygon)
       );
-      console.log(BalanceGLTVP);
-      console.log(BalanceGLTVB);
     }
   };
 
@@ -90,7 +86,6 @@ export const Bridge = () => {
 
   const checkAllowance = async () => {
     if (token === "GLTV1") {
-      console.log("lololololololol");
       const ERC20Contract = new ethers.Contract(
         GLTV1AddressOnBinance,
         erc20ABI,
@@ -100,7 +95,6 @@ export const Bridge = () => {
         address,
         BridgeRouterBAddress
       );
-      console.log(tokenAllowance.toString());
       setAllowance(tokenAllowance.toString());
     }
     if (token === "GLTV2") {
@@ -114,7 +108,6 @@ export const Bridge = () => {
         BridgeRouterBAddress
       );
       setAllowance(tokenAllowance.toString());
-      console.log(allowance);
     }
   };
   const Approve = async () => {
@@ -128,7 +121,6 @@ export const Bridge = () => {
         BridgeRouterBAddress,
         "1000000000000000000000000000000000000000"
       );
-      console.log(tokenApprove.wait());
     }
     if (token === "GLTV2") {
       const ERC20Contract = new ethers.Contract(
@@ -141,20 +133,18 @@ export const Bridge = () => {
         BridgeRouterBAddress,
         "1000000000000000000000000000000000000"
       );
-      console.log(tokenApprove.wait());
     }
   };
 
   const Bridge = async () => {
     if (token === "GLTV1") {
-      console.log(`sent : ${amount} GLTV1 to ploygon chain `);
       const BridgeContract = new ethers.Contract(
         BridgeRouterBAddress,
         BridgeRouterBABI,
         signer
       );
       const sentvalue = ethers.utils.parseUnits(amount, 18);
-      console.log(sentvalue.toString(), "This was sent with v1");
+
       const bridge = await BridgeContract.bridgeToken(
         "Polygon",
         BridgeRouterPAddress,
@@ -165,16 +155,13 @@ export const Bridge = () => {
           value: ethers.utils.parseEther("0.01"),
         }
       );
-      console.log(bridge.wait());
     } else if (token === "GLTV2") {
-      console.log(`sent : ${amount} GLTV2 to ploygon chain `);
       const BridgeContract = new ethers.Contract(
         BridgeRouterBAddress,
         BridgeRouterBABI,
         signer
       );
       const sentvalue = ethers.utils.parseUnits(amount, 18);
-      console.log(sentvalue.toString(), "This was sent with v2");
       const bridge = await BridgeContract.bridgeToken(
         "Polygon",
         BridgeRouterPAddress,
@@ -185,7 +172,6 @@ export const Bridge = () => {
           value: ethers.utils.parseEther("0.01"),
         }
       );
-      console.log(bridge.wait());
     }
   };
 

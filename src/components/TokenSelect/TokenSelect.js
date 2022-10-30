@@ -19,7 +19,7 @@ export const TokenSelectBtn = ({
           <div>
             {/*} <img
               onLoadedData={(e) => {
-                console.log(e);
+                //(e);
               }}
               className={styles.componentDivImage}
               width="40px"

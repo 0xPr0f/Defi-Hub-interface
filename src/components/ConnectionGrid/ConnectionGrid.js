@@ -46,15 +46,9 @@ const ConnectionGrid = () => {
           key={connector.id}
           clickFunction={() => connect({ connector: connector })}
           image={image[index]}
-        >
-          {console.log(index)}
-          {!connector.ready && " (unsupported)"}
-          {isLoading &&
-            connector.id === pendingConnector?.id &&
-            " (connecting)"}
-        </ConnectionGridBtn>
+        ></ConnectionGridBtn>
       ))}
-
+      <br />
       {error && (
         <div style={{ padding: "1em 2em", color: "red" }}>
           <span>{error.message}</span>

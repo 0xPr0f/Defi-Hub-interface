@@ -140,7 +140,7 @@ export const FromDropdown = ({ className }) => {
                     "token"
                   )}&sourceNetwork=BSCTN&destNetwork=POLYTN`
                 );
-                console.log(value);
+                //(value);
                 return handleClose();
               }}
             >
@@ -208,7 +208,7 @@ export const ToDropdown = ({ className }) => {
                     "token"
                   )}&sourceNetwork=BSCTN&destNetwork=POLYTN`
                 );
-                console.log(value);
+                //(value);
                 return handleClose();
               }}
             >

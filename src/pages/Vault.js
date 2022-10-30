@@ -68,13 +68,13 @@ export const Vault = () => {
       VaultFactoryABI,
       signer
     );
-    console.log(Math.trunc(Number(epochDateValue) + 2678399).toString());
+    //(Math.trunc(Number(epochDateValue) + 2678399).toString());
     const createVault = await VaultContract.createVault(
       amount,
       tokenAddress,
       Math.trunc(epochDateValue).toString()
     );
-    console.log(createVault.wait());
+    //(createVault.wait());
   };
   useEffect(() => {
     if (!vaults) {
@@ -96,7 +96,7 @@ export const Vault = () => {
   };
 
   const display = () => {
-    console.log();
+    //();
   };
 
   /* When the user clicks on the button, 
@@ -130,7 +130,7 @@ toggle between hiding and showing the dropdown content */
         VaultFactoryAddress,
         "1000000000000000000000000000000000000000"
       );
-      console.log(tokenApprove.wait());
+      //(tokenApprove.wait());
     }
   };
   return (
@@ -224,7 +224,7 @@ toggle between hiding and showing the dropdown content */
                           setCurrentTokenSymbol(bal.contract_ticker_symbol);
                           setTokenDecimal(bal.contract_decimals);
                           showTokenModal();
-                          console.log(currentTokenSymbol);
+                          //(currentTokenSymbol);
                         }}
                         key={index}
                       >

@@ -1,18 +1,8 @@
 import "./App.css";
 import { useEffect } from "react";
-import ConnectionGrid from "./components/ConnectionGrid/ConnectionGrid";
-import {
-  useAccount,
-  useEnsAvatar,
-  useEnsName,
-  useDisconnect,
-  useConnect,
-} from "wagmi";
+import { useAccount, useDisconnect } from "wagmi";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import Blockie from "react-blockies";
-import { RiArrowDropDownLine } from "react-icons/ri";
-import { Routes, Route, Link } from "react-router-dom";
-import { FaTimes } from "react-icons/fa";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import { Overview } from "./pages/Overview";
 import { Send } from "./pages/Send";
 import { Swap } from "./pages/Swap";
@@ -22,40 +12,13 @@ import { Bridge } from "./pages/Bridge";
 import { Earn } from "./pages/Earn";
 import VaultView from "./pages/VaultView";
 import { Faucet } from "./pages/Faucet";
+import Home from "./pages/Home";
 
 function App() {
   // const { data: ensAvatar } = useEnsAvatar({ addressOrName: address });
   // const { data: ensName } = useEnsName({ address });
   const { address, connector, isConnected } = useAccount();
-  const { disconnect } = useDisconnect();
 
-  /* if (isConnected) {
-    console.log(connector);
-    return (
-      <div>
-        <img src={ensAvatar} alt="ENS Avatar" />
-        <div>{ensName ? `${ensName} (${address})` : address}</div>
-        {connector ? <div>Connected to {connector.name}</div> : <></>}
-        <br />
-        <button> disconnect</button>
-      </div>
-    );
-  }
-
-  // When the user clicks anywhere outside of the modal, close it
-
-  useEffect(() => {
-    if (isConnected) {
-      document.getElementById("myModal").style.display = "none";
-    }
-  });
-
-  window.onclick = function (event) {
-    if (event.target === document.getElementById("myModal")) {
-      document.getElementById("myModal").style.display = "none";
-    }
-  };
-  */
   return (
     <div className="App">
       <div className="sidenav">
@@ -67,30 +30,7 @@ function App() {
             accountStatus={{ smallScreen: "avatar", largeScreen: "full" }}
           />
         </div>
-        {console.log(address, isConnected)}
-        {/*} {!isConnected ? (
-          <span
-            onClick={() => {
-              if (!isConnected) {
-                document.getElementById("myModal").style.display = "block";
-              }
-            }}
-            className="connect"
-          >
-          
-          </span>
-        ) : (
-        
-            <Blockie
-              seed={"" + address + ""}
-              size={10}
-              scale={3}
-              className="Blockie"
-            />
-            <p className="connect">{getEllipsisTxt(address, 5)}</p>
-            <RiArrowDropDownLine size={"30px"} />
-          </div>
-        )} */}
+
         <br />
         <span>
           <Link
@@ -148,13 +88,12 @@ function App() {
                 element={<NFTView />}
               />
               <Route path="/vault/:vault_address" element={<VaultView />} />
-              {/*} <Route path="/explore" element={<Vault />} /> */}
               <Route path="/earn" element={<Earn />} />
               <Route path="/send" element={<Send />} />
               <Route path="/swap" element={<Swap />} />
               <Route path="/vault" element={<Vault />} />
               <Route path="/bridge" element={<Bridge />} />
-              <Route path="/" exact element={<Faucet />} />
+              <Route path="/" exact element={<Home />} />
               <Route path="/faucet" element={<Faucet />} />
             </Routes>
           </div>

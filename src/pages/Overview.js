@@ -33,7 +33,7 @@ export const Overview = () => {
     if (address !== undefined && address.length >= 42) {
       const lol = await getTransactions(address, 97);
       setTransactions(lol);
-      console.log(transactions);
+      //(transactions);
     }
   };
 
@@ -64,7 +64,7 @@ export const Overview = () => {
       setCopyValue("Copied!");
       setTimeout(() => setCopyValue(shortenAddress(address)), 3000);
     } catch (error) {
-      console.log(error);
+      //(error);
     }
   };
 

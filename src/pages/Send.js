@@ -36,14 +36,13 @@ export const Send = () => {
 
   const SendTrasaction = async (tokenaddress, toaddress, value) => {
     if (currentTokenSymbol !== "BNBT") {
-      console.log("not bnb");
       const ERC20Contract = new ethers.Contract(tokenaddress, erc20ABI, signer);
       const sentvalue = ethers.utils.parseUnits(value, Number(tokenDecimal));
-      console.log(sentvalue);
+      //(sentvalue);
       const tokentransfer = await ERC20Contract.transfer(toaddress, sentvalue);
-      console.log(tokentransfer.wait());
+      //(tokentransfer.wait());
     } else {
-      console.log("bnb");
+      //("bnb");
       const tx = {
         from: address,
         to: toaddress,
@@ -55,7 +54,7 @@ export const Send = () => {
           console.dir(transaction);
         });
       } catch (error) {
-        console.log(error);
+        //(error);
       }
     }
   };
@@ -122,7 +121,7 @@ export const Send = () => {
             <span
               style={{ cursor: "pointer" }}
               onClick={() => {
-                setAmount((Number(tokenBalance) - 0.001).toString());
+                setAmount(Number(tokenBalance).toString());
               }}
             >
               max
@@ -196,7 +195,7 @@ export const Send = () => {
                 setTokenBalance(
                   (bal.balance * 10 ** -bal.contract_decimals).toFixed(3)
                 );
-                console.log(currentTokenSymbol);
+                //(currentTokenSymbol);
               }}
               key={index}
               name={bal.contract_name}

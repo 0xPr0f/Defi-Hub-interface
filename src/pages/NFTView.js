@@ -31,7 +31,7 @@ export const NFTView = () => {
   useEffect(() => {
     if (nft.token_uri && !nftImage.description) {
       nftimage(nft.token_uri);
-      console.log(nft.token_uri);
+      //(nft.token_uri);
     }
   });
 
