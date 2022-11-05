@@ -23,8 +23,9 @@ export const Overview = () => {
   const [nftImage, setNftImage] = useState([]);
 
   const nftload = async () => {
-    if (address !== undefined && address.length >= 42) {
-      const lol = await getNFTBalance(address);
+    if (address !== undefined && address.length === 42) {
+      const lol = await getNFTBalance(address, "bsc%20testnet");
+      console.log(lol);
       setNft(lol);
     }
   };
@@ -189,7 +190,7 @@ export const Overview = () => {
                         <br />
                         <div>
                           <br />
-                          {nft.length !== 0 ? (
+                          {nft?.length !== 0 ? (
                             <div>
                               {nft.map((nfts, index) => (
                                 <div key={index}>
@@ -201,6 +202,7 @@ export const Overview = () => {
                                     contractaddress={nfts.token_address}
                                     tokenid={nfts.token_id}
                                   />
+                                  <br />
                                 </div>
                               ))}
                             </div>
