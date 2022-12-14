@@ -26,3 +26,10 @@ export const GLTV2AddressOnBinance =
   0x2fC892730011c5A01aa9F987E6EBF181f64509b6               
 export const GLTV2AddressOnPolygon =
   0x218ACEec9bE312134ACa7F5A170FaeC80F548f28                 
+
+### On the moonbase chain 
+export const BridgeRouterMAddress = 0x3e40434E837aEe9a07eF13Bb1870E68C9D9eEfC3
+  export const GLTV1AddressOnMoonbase =
+  0xF9C56F7B36F79fcd41dbD04a6755Cf2c17C06629               
+export const GLTV2AddressOnMoonbase =
+  0xf4defF882B4B8f0fb708DA4C7eD25b53aE65BC3f  

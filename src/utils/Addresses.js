@@ -13,3 +13,8 @@ export const GLTV2AddressOnBinance =
   "0xB82851977290B69365CFC708e5AE48e0701114f5";
 export const GLTV2AddressOnPolygon =
   "0x218ACEec9bE312134ACa7F5A170FaeC80F548f28";
+  export const BridgeRouterMAddress = "0x3e40434E837aEe9a07eF13Bb1870E68C9D9eEfC3";
+  export const GLTV1AddressOnMoonbase =
+  "0xF9C56F7B36F79fcd41dbD04a6755Cf2c17C06629";           
+export const GLTV2AddressOnMoonbase =
+  "0xf4defF882B4B8f0fb708DA4C7eD25b53aE65BC3f";  

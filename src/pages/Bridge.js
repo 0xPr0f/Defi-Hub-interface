@@ -19,6 +19,9 @@ import {
   GLTV1AddressOnPolygon,
   GLTV2AddressOnBinance,
   GLTV2AddressOnPolygon,
+  GLTV1AddressOnMoonbase,
+  GLTV2AddressOnMoonbase,
+  BridgeRouterMAddress
 } from "../utils/Addresses";
 import { BridgeRouterBABI } from "../utils/Abis";
 import { ethers } from "ethers";
